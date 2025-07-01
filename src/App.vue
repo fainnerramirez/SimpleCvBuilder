@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import HeaderComponent from './components/Header.component.vue';
-import SplitterComponent from './components/Splitter.component.vue';
+import NavbarComponent from './components/Navbar.component.vue';
+import StaticsComponent from './components/Statics.component.vue';
+import StepCvComponent from './components/StepCv.component.vue';
 </script>
 
 <template>
-    <HeaderComponent />
-    <SplitterComponent />
+    <NavbarComponent />
+    <StaticsComponent />
+    <StepCvComponent />
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
