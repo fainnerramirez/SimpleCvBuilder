@@ -5,15 +5,20 @@
     </div>
     <div class="information__container__app">
       <div>
-        <el-input size="large" class="input-field" v-model="inputName" placeholder="Ingresa tu nombre completo" />
-        <el-input size="large" class="input-field" v-model="inputEmail" placeholder="Ingresa tu correo electrónico" />
+        <el-input type="text" size="large" class="input-field" v-model="inputName"
+          placeholder="Ingresa tu nombre completo" />
+        <el-input type="email" size="large" class="input-field" v-model="inputEmail"
+          placeholder="Ingresa tu correo electrónico" />
       </div>
       <div>
-        <el-input size="large" class="input-field" v-model="inputDirection" placeholder="Ingresa tu ubicación" />
-        <el-input size="large" class="input-field" v-model="inputPhone" placeholder="Ingresa tu teléfono o celular" />
+        <el-input type="text" size="large" class="input-field" v-model="inputDirection"
+          placeholder="Ingresa tu ubicación" />
+        <el-input type="number" size="large" class="input-field" v-model="inputPhone"
+          placeholder="Ingresa tu teléfono o celular" />
       </div>
-      <el-input size="large" class="input-field-large" v-model="inputLinkedin" placeholder="Ingresa url LinkedIn" />
-      <el-input class="input-field-large" type="textarea" v-model="inputResume" size="large"
+      <el-input type="text" size="large" class="input-field-large" v-model="inputLinkedin"
+        placeholder="Ingresa url LinkedIn" />
+      <el-input type="textarea" class="input-field-large" v-model="inputResume" size="large"
         :autosize="{ minRows: 2, maxRows: 4 }" placeholder="Ingresa tu resumen profesional" />
       <div>
         <el-button size="large" type="primary" @click="next()" style="width: 76.5%;">
@@ -21,28 +26,28 @@
         </el-button>
       </div>
     </div>
+    <p>{{ inputName }}</p>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
 
-const inputName = ref("");
-const inputEmail = ref("");
-const inputDirection = ref("");
-const inputPhone = ref("");
-const inputLinkedin = ref("");
-const inputResume = ref("");
+const inputName = ref<string>("");
+const inputEmail = ref<string>("");
+const inputDirection = ref<string>("");
+const inputPhone = ref<string>("");
+const inputLinkedin = ref<string>("");
+const inputResume = ref<string>("");
 
-const props = defineProps({
-  step: {
-    type: String,
-    required: true
-  }
-});
+interface Props {
+  step: string
+}
+
+const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  (event: 'update-step', newStep: string): void
+  (event: 'update-step', step: string): void
 }>()
 
 const next = () => {

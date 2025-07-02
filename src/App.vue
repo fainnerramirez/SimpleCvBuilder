@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import NavbarComponent from './components/Navbar.component.vue';
-import StaticsComponent from './components/Statics.component.vue';
-import StepCvComponent from './components/StepCv.component.vue';
+import NavbarComponent from './components/NavbarComponent.vue';
+import StaticsComponent from './components/StaticsComponent.vue';
+import StepCvComponent from './components/StepCvComponent.vue';
+import HeaderComponent from "./components/HeaderComponent.vue";
 </script>
 
 <template>
     <NavbarComponent />
+    <HeaderComponent />
     <StaticsComponent />
     <StepCvComponent />
 </template>
