@@ -52,48 +52,61 @@ import EducationComponent from './EducationComponent.vue';
 import HabilityComponent from './HabilityComponent.vue';
 import ViewPreviewComponent from './ViewPreviewComponent.vue';
 
-const step = ref('1')
-const options = [
+type OptionsSteps = {
+    label: string,
+    value: string,
+    icon: any,
+    disabled: boolean
+}
+
+const step = ref('1');
+const options = ref<OptionsSteps[]>([
     {
         label: 'Información Personal',
         value: '1',
         icon: User,
+        disabled: false
     },
     {
         label: 'Experiencia Laboral',
         value: '2',
         icon: Suitcase,
+        disabled: true
     },
     {
         label: 'Educación',
         value: '3',
         icon: School,
+        disabled: true
     },
     {
         label: 'Habilidades',
         value: '4',
         icon: Star,
+        disabled: true
     },
     {
         label: 'Vista Previa',
         value: '5',
         icon: Document,
-        disabled: false,
+        disabled: true,
     }
-]
+])
 
 const updateStep = (currentStep: string) => {
     const stepDefault = '1';
     const stepNumber = Number(currentStep);
     const newStep = (stepNumber + 1);
 
-    if (newStep <= options.length) {
+    if (newStep <= options.value.length) {
         step.value = newStep.toString();
     }
     else {
         step.value = stepDefault;
     }
 
-}
+    const element = options.value.find(e => e.value === newStep.toString());
+    if (element) element.disabled = false;
 
+}
 </script>

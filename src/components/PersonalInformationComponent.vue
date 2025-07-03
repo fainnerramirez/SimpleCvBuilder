@@ -11,7 +11,7 @@
           placeholder="Ingresa tu correo electrónico" />
       </div>
       <div>
-        <el-input type="text" size="large" class="input-field" v-model="inputDirection"
+        <el-input type="text" size="large" class="input-field" v-model="inputLocation"
           placeholder="Ingresa tu ubicación" />
         <el-input type="number" size="large" class="input-field" v-model="inputPhone"
           placeholder="Ingresa tu teléfono o celular" />
@@ -26,19 +26,22 @@
         </el-button>
       </div>
     </div>
-    <p>{{ inputName }}</p>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import { useSimpleCvStore } from "../stores/store";
 
-const inputName = ref<string>("");
-const inputEmail = ref<string>("");
-const inputDirection = ref<string>("");
-const inputPhone = ref<string>("");
-const inputLinkedin = ref<string>("");
-const inputResume = ref<string>("");
+const store = useSimpleCvStore();
+const data = store.personalInformationStore;
+
+const inputName = ref<string>(data?.username ?? "");
+const inputEmail = ref<string>(data?.email ?? "");
+const inputLocation = ref<string>(data?.location ?? "");
+const inputPhone = ref<string>(data?.phone ?? "");
+const inputLinkedin = ref<string>(data?.url_web ?? "");
+const inputResume = ref<string>(data?.summary ?? "");
 
 interface Props {
   step: string
@@ -46,11 +49,25 @@ interface Props {
 
 const props = defineProps<Props>();
 
+const updatePersonalInformationData = () => {
+  store.$patch((state) => {
+    state.personalInformationStore = {
+      email: inputEmail.value,
+      location: inputLocation.value,
+      phone: inputPhone.value,
+      summary: inputResume.value,
+      url_web: inputLinkedin.value,
+      username: inputName.value
+    }
+  });
+}
+
 const emit = defineEmits<{
   (event: 'update-step', step: string): void
 }>()
 
 const next = () => {
+  updatePersonalInformationData();
   emit('update-step', props.step);
 }
 

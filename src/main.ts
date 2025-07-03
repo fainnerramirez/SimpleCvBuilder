@@ -9,10 +9,12 @@ import '@fontsource-variable/inter';
 import './global.css';
 import Spanish from "element-plus/es/locale/lang/es";
 import App from './App.vue'
+import PluginPiniaState from "pinia-plugin-persistedstate";
 
-const pinia = createPinia();
+const pinia = createPinia()
+    .use(PluginPiniaState);
 const app = createApp(App);
 
-app.use(pinia);
-app.use(ElementPlus, { locale: Spanish });
-app.mount('#app')
+app.use(pinia)
+    .use(ElementPlus, { locale: Spanish })
+    .mount('#app')

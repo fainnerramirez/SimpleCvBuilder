@@ -14,21 +14,34 @@ export interface Sections {
     children?: SectionChildrenProps[],
 }
 
-export interface workExperienceProps {
-    position: string,
+export interface PersonalInformationStoreProps {
+    username: string,
+    email: string,
+    phone: string,
+    location: string,
+    url_web: string,
+    summary: string
+}
+
+export interface WorkExperienceStoreProps {
+    id: number,
     company: string,
+    position: string,
     dateStart: string,
-    dateEnd?: string,
-    responsabilities: string
+    dateEnd: string,
+    isActuallyWork: boolean,
+    description: string
 }
 
-export interface educationProps {
-    university: string,
-    title: string,
-    dateStart: Date,
-    dateEnd?: Date
+export interface EducationStoreProps {
+    institution: string,
+    titleGraduation: string,
+    fieldStudy: string,
+    dateStart: string,
+    dateEnd: string
 }
 
-export interface habilitiesProps {
-    hability: string
+export interface HabilityStoreProps {
+    name: string,
+    level: number, //1 a 3, 1 = básico, 2 = intermedio, 3 = avanzado
 }

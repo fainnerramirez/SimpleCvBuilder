@@ -24,20 +24,18 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import type { Experience } from './WorkExperienceComponent.vue';
+import type { WorkExperienceStoreProps } from '../types/types';
 
-const inputCompany = ref<string>("");
-const inputPosition = ref<string>("");
-const inputDateStart = ref<string>("");
-const inputDateEnd = ref<string>("");
-const checkActuallyWork = ref<boolean>(false);
-const inputDescription = ref<string>("");
+interface Props { data: WorkExperienceStoreProps }
+const props = defineProps<Props>();
+const { data } = props;
 
-interface Props {
-    data: Experience
-}
-
-defineProps<Props>();
+const inputCompany = ref<string>(data.company);
+const inputPosition = ref<string>(data.position);
+const inputDateStart = ref<string>(data.dateStart);
+const inputDateEnd = ref<string>(data.dateEnd);
+const checkActuallyWork = ref<boolean>(data.isActuallyWork);
+const inputDescription = ref<string>(data.description);
 
 </script>
 
