@@ -43,12 +43,6 @@ const inputPhone = ref<string>(data?.phone ?? "");
 const inputLinkedin = ref<string>(data?.url_web ?? "");
 const inputResume = ref<string>(data?.summary ?? "");
 
-interface Props {
-  step: string
-}
-
-const props = defineProps<Props>();
-
 const updatePersonalInformationData = () => {
   store.$patch((state) => {
     state.personalInformationStore = {
@@ -62,13 +56,10 @@ const updatePersonalInformationData = () => {
   });
 }
 
-const emit = defineEmits<{
-  (event: 'update-step', step: string): void
-}>()
-
 const next = () => {
+  console.log("Click next");
   updatePersonalInformationData();
-  emit('update-step', props.step);
+  store.updateStep();
 }
 
 </script>

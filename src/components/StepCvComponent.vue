@@ -1,7 +1,7 @@
 <template>
     <div style="display: flex; gap: 5px; align-items: start;">
         <div>
-            <el-segmented v-model="step" :options="options" direction="vertical" size="default">
+            <el-segmented v-model="step" :options="store.optionsStep" direction="vertical" size="default">
                 <template #default="scope">
                     <div :class="[
                         'flex',
@@ -19,7 +19,7 @@
         </div>
         <div style="width: 100%;">
             <div v-if="step === '1'">
-                <PersonalInformationComponent :step="step" @update-step="updateStep" />
+                <PersonalInformationComponent />
             </div>
             <div v-else-if="step === '2'">
                 <WorkExperienceComponent />
@@ -34,79 +34,19 @@
                 <ViewPreviewComponent />
             </div>
         </div>
+        <p>{{ step }}</p>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import {
-    User,
-    School,
-    Star,
-    Document,
-    Suitcase
-} from '@element-plus/icons-vue';
 import PersonalInformationComponent from "./PersonalInformationComponent.vue";
 import WorkExperienceComponent from './WorkExperienceComponent.vue';
 import EducationComponent from './EducationComponent.vue';
 import HabilityComponent from './HabilityComponent.vue';
 import ViewPreviewComponent from './ViewPreviewComponent.vue';
+import { useSimpleCvStore } from '../stores/store';
 
-type OptionsSteps = {
-    label: string,
-    value: string,
-    icon: any,
-    disabled: boolean
-}
-
-const step = ref('1');
-const options = ref<OptionsSteps[]>([
-    {
-        label: 'Información Personal',
-        value: '1',
-        icon: User,
-        disabled: false
-    },
-    {
-        label: 'Experiencia Laboral',
-        value: '2',
-        icon: Suitcase,
-        disabled: true
-    },
-    {
-        label: 'Educación',
-        value: '3',
-        icon: School,
-        disabled: true
-    },
-    {
-        label: 'Habilidades',
-        value: '4',
-        icon: Star,
-        disabled: true
-    },
-    {
-        label: 'Vista Previa',
-        value: '5',
-        icon: Document,
-        disabled: true,
-    }
-])
-
-const updateStep = (currentStep: string) => {
-    const stepDefault = '1';
-    const stepNumber = Number(currentStep);
-    const newStep = (stepNumber + 1);
-
-    if (newStep <= options.value.length) {
-        step.value = newStep.toString();
-    }
-    else {
-        step.value = stepDefault;
-    }
-
-    const element = options.value.find(e => e.value === newStep.toString());
-    if (element) element.disabled = false;
-
-}
+const store = useSimpleCvStore();
+const step = ref<string>(store.currentStep);
 </script>

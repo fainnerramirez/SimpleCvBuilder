@@ -24,7 +24,7 @@ export interface PersonalInformationStoreProps {
 }
 
 export interface WorkExperienceStoreProps {
-    id: number,
+    id: string,
     company: string,
     position: string,
     dateStart: string,
@@ -44,4 +44,11 @@ export interface EducationStoreProps {
 export interface HabilityStoreProps {
     name: string,
     level: number, //1 a 3, 1 = básico, 2 = intermedio, 3 = avanzado
+}
+
+export type OptionsSteps = {
+    label: string,
+    value: string,
+    icon: any,
+    disabled: boolean
 }

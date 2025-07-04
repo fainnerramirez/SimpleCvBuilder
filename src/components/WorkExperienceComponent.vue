@@ -15,7 +15,6 @@ import ExperienceComponent from './ExperienceComponent.vue';
 import { useSimpleCvStore } from '../stores/store';
 import type { WorkExperienceStoreProps } from '../types/types';
 
-
 const store = useSimpleCvStore();                    
 const data = store.workExperienceStore;
 const dataExperience = ref<WorkExperienceStoreProps[]>(data);
