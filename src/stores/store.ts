@@ -1,51 +1,53 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import type { EducationStoreProps, HabilityStoreProps, OptionsSteps, PersonalInformationStoreProps, WorkExperienceStoreProps } from "../types/types";
-import {
-    User,
-    School,
-    Star,
-    Document,
-    Suitcase
-} from '@element-plus/icons-vue';
+import type { EducationStoreProps, HabilityStoreProps, PersonalInformationStoreProps, WorkExperienceStoreProps } from "../types/types";
+import { optionsStep } from "../data/data";
+import { v4 as uuid } from "uuid";
 
 export const useSimpleCvStore = defineStore('simpleCVBuilderStore', () => {
 
     const personalInformationStore = ref<Partial<PersonalInformationStoreProps>>({});
-    const workExperienceStore = ref<WorkExperienceStoreProps[]>([]);
+    const workExperienceStore = ref<WorkExperienceStoreProps[]>([{
+        id: uuid(),
+        company: "",
+        dateEnd: "",
+        dateStart: "",
+        description: "",
+        isActuallyWork: false,
+        position: ""
+    }]);
     const educationStore = ref<EducationStoreProps[]>([]);
     const habilitiesStore = ref<HabilityStoreProps[]>([]);
 
-    //variables globales
     const currentStep = ref<string>("1");
-    const optionsStep = ref<OptionsSteps[]>([
-        { label: 'Información Personal', value: '1', icon: User, disabled: false },
-        { label: 'Experiencia Laboral', value: '2', icon: Suitcase, disabled: true },
-        { label: 'Educación', value: '3', icon: School, disabled: true },
-        { label: 'Habilidades', value: '4', icon: Star, disabled: true },
-        { label: 'Vista Previa', value: '5', icon: Document, disabled: true }
-    ]);
-
     const updateStep = () => {
-        const stepDefault = '1';
-        const stepNumber = Number(currentStep.value);
-        console.log("Se ejecuto el chaneg Step: ", currentStep.value);
-        const newStep = (stepNumber + 1);
-        if (newStep <= optionsStep.value.length) {
-            currentStep.value = newStep.toString();
-        }
-        else {
-            currentStep.value = stepDefault;
+        const current = Number(currentStep.value);
+        const maxSteps = optionsStep.value.length;
+        const next = current + 1;
+
+        const nextStepValue = next <= maxSteps ? next.toString() : '1';
+        currentStep.value = nextStepValue;
+
+        if (next <= maxSteps) {
+            enableStep(nextStepValue);
         }
 
-        const element = optionsStep.value.find(e => e.value === newStep.toString());
-        console.log("Elemento a actualizar: ", element);
-
-        if (element) {
-            element.disabled = false;
-            console.log("Elemento actualizado: ", element);
+        console.log(`Navegando de paso ${current} a ${nextStepValue}`);
+    };
+    const enableStep = (stepValue: string) => {
+        const step = optionsStep.value.find(s => s.value === stepValue);
+        if (step?.disabled) {
+            step.disabled = false;
+            console.log(`Paso ${stepValue} habilitado`);
         }
-    }
+    };
+    const disableStep = (stepValue: string) => {
+        const step = optionsStep.value.find(s => s.value === stepValue);
+        if (step?.disabled) {
+            step.disabled = true;
+            console.log(`Paso ${stepValue} Inhabilitado`);
+        }
+    };
 
     return {
         personalInformationStore,
@@ -53,8 +55,9 @@ export const useSimpleCvStore = defineStore('simpleCVBuilderStore', () => {
         educationStore,
         habilitiesStore,
         currentStep,
-        optionsStep,
-        updateStep
+        updateStep,
+        enableStep,
+        disableStep
     };
 
 }, { persist: true });

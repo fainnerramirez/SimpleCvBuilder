@@ -10,17 +10,33 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
 import ExperienceComponent from './ExperienceComponent.vue';
 import { useSimpleCvStore } from '../stores/store';
-import type { WorkExperienceStoreProps } from '../types/types';
+import { storeToRefs } from 'pinia';
+import { v4 as uuid } from 'uuid';
 
-const store = useSimpleCvStore();                    
-const data = store.workExperienceStore;
-const dataExperience = ref<WorkExperienceStoreProps[]>(data);
+const store = useSimpleCvStore();
+const { workExperienceStore: dataExperience } = storeToRefs(store);
 
-const addExperience = () => {}
-const next = () => {}
+console.log("Data experience: ", dataExperience.value);
+
+const addExperience = () => {
+  store.$patch((state) => {
+    state.workExperienceStore.push({
+      id: uuid(),
+      company: "",
+      dateEnd: "",
+      dateStart: "",
+      description: "",
+      isActuallyWork: false,
+      position: ""
+    })
+  })
+}
+
+const next = () => {
+  store.updateStep();
+}
 
 </script>
 

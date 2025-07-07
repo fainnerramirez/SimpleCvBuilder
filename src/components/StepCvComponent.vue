@@ -1,7 +1,7 @@
 <template>
     <div style="display: flex; gap: 5px; align-items: start;">
         <div>
-            <el-segmented v-model="step" :options="store.optionsStep" direction="vertical" size="default">
+            <el-segmented v-model="step" :options="options" direction="vertical" size="default">
                 <template #default="scope">
                     <div :class="[
                         'flex',
@@ -45,6 +45,7 @@ import HabilityComponent from './HabilityComponent.vue';
 import ViewPreviewComponent from './ViewPreviewComponent.vue';
 import { useSimpleCvStore } from '../stores/store';
 import { storeToRefs } from "pinia";
+import { optionsStep as options } from "../data/data";
 
 const store = useSimpleCvStore();
 const { currentStep: step } = storeToRefs(store);
