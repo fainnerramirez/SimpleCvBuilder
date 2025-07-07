@@ -34,19 +34,18 @@
                 <ViewPreviewComponent />
             </div>
         </div>
-        <p>{{ step }}</p>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
 import PersonalInformationComponent from "./PersonalInformationComponent.vue";
 import WorkExperienceComponent from './WorkExperienceComponent.vue';
 import EducationComponent from './EducationComponent.vue';
 import HabilityComponent from './HabilityComponent.vue';
 import ViewPreviewComponent from './ViewPreviewComponent.vue';
 import { useSimpleCvStore } from '../stores/store';
+import { storeToRefs } from "pinia";
 
 const store = useSimpleCvStore();
-const step = ref<string>(store.currentStep);
+const { currentStep: step } = storeToRefs(store);
 </script>
