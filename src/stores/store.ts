@@ -6,8 +6,7 @@ import { v4 as uuid } from "uuid";
 
 export const useSimpleCvStore = defineStore('simpleCVBuilderStore', () => {
 
-    const personalInformationStore = ref<Partial<PersonalInformationStoreProps>>({});
-    const workExperienceStore = ref<WorkExperienceStoreProps[]>([{
+    const elementDefaultWork: WorkExperienceStoreProps = {
         id: uuid(),
         company: "",
         dateEnd: "",
@@ -15,7 +14,10 @@ export const useSimpleCvStore = defineStore('simpleCVBuilderStore', () => {
         description: "",
         isActuallyWork: false,
         position: ""
-    }]);
+    }
+
+    const personalInformationStore = ref<Partial<PersonalInformationStoreProps>>({});
+    const workExperienceStore = ref<WorkExperienceStoreProps[]>([elementDefaultWork]);
     const educationStore = ref<EducationStoreProps[]>([]);
     const habilitiesStore = ref<HabilityStoreProps[]>([]);
 
