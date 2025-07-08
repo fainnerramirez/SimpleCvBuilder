@@ -22,32 +22,36 @@ export const useSimpleCvStore = defineStore('simpleCVBuilderStore', () => {
     const habilitiesStore = ref<HabilityStoreProps[]>([]);
 
     const currentStep = ref<string>("1");
-    const updateStep = () => {
-        const current = Number(currentStep.value);
-        const maxSteps = optionsStep.value.length;
-        const next = current + 1;
+    const MAXSTEP = optionsStep.value.length; // 5
 
-        const nextStepValue = next <= maxSteps ? next.toString() : '1';
+    const nextStep = () => {
+        const CURRENT = Number(currentStep.value);
+        const next = CURRENT + 1;
+        const nextStepValue = next <= MAXSTEP ? next.toString() : '1';
         currentStep.value = nextStepValue;
-
-        if (next <= maxSteps) {
+        console.log("Click en next step: ", { next, nextStepValue });
+        if (next <= MAXSTEP) {
             enableStep(nextStepValue);
         }
-
-        console.log(`Navegando de paso ${current} a ${nextStepValue}`);
     };
+
+    const previousStep = () => {
+        const CURRENT = Number(currentStep.value);
+        const previous = CURRENT - 1; //4
+        const previousStepValue = (previous <= MAXSTEP && previous !== 0) ? previous.toString() : '1';
+        currentStep.value = previousStepValue;
+    }
+
     const enableStep = (stepValue: string) => {
         const step = optionsStep.value.find(s => s.value === stepValue);
         if (step?.disabled) {
             step.disabled = false;
-            console.log(`Paso ${stepValue} habilitado`);
         }
     };
     const disableStep = (stepValue: string) => {
         const step = optionsStep.value.find(s => s.value === stepValue);
         if (step?.disabled) {
             step.disabled = true;
-            console.log(`Paso ${stepValue} Inhabilitado`);
         }
     };
 
@@ -57,7 +61,8 @@ export const useSimpleCvStore = defineStore('simpleCVBuilderStore', () => {
         educationStore,
         habilitiesStore,
         currentStep,
-        updateStep,
+        nextStep,
+        previousStep,
         enableStep,
         disableStep
     };

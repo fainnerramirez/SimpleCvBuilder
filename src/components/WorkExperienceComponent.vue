@@ -5,6 +5,7 @@
       <ExperienceComponent :data="experience" />
     </span>
     <el-button type="primary" @click="addExperience">Agregar nueva experiencia</el-button>
+    <el-button type="primary" @click="previous">Anterior</el-button>
     <el-button type="primary" @click="next">Siguiente</el-button>
   </div>
 </template>
@@ -17,8 +18,6 @@ import { v4 as uuid } from 'uuid';
 
 const store = useSimpleCvStore();
 const { workExperienceStore: dataExperience } = storeToRefs(store);
-
-console.log("Data experience: ", dataExperience.value);
 
 const addExperience = () => {
   store.$patch((state) => {
@@ -34,9 +33,8 @@ const addExperience = () => {
   })
 }
 
-const next = () => {
-  store.updateStep();
-}
+const next = () => store.nextStep();
+const previous = () => store.previousStep();
 
 </script>
 

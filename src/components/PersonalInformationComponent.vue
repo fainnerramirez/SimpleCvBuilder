@@ -59,7 +59,7 @@ const updatePersonalInformationData = () => {
 const next = () => {
   console.log("Click next");
   updatePersonalInformationData();
-  store.updateStep();
+  store.nextStep();
 }
 
 </script>
