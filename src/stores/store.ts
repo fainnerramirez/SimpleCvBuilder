@@ -1,8 +1,8 @@
-import { defineStore } from "pinia";
 import { ref } from "vue";
-import type { EducationStoreProps, HabilityStoreProps, PersonalInformationStoreProps, WorkExperienceStoreProps } from "../types/types";
-import { optionsStep } from "../data/data";
+import { defineStore } from "pinia";
 import { v4 as uuid } from "uuid";
+import { optionsStep } from "../data/data";
+import type { EducationStoreProps, HabilityStoreProps, PersonalInformationStoreProps, WorkExperienceStoreProps } from "../types/types";
 
 export const useSimpleCvStore = defineStore('simpleCVBuilderStore', () => {
 
@@ -29,7 +29,6 @@ export const useSimpleCvStore = defineStore('simpleCVBuilderStore', () => {
         const next = CURRENT + 1;
         const nextStepValue = next <= MAXSTEP ? next.toString() : '1';
         currentStep.value = nextStepValue;
-        console.log("Click en next step: ", { next, nextStepValue });
         if (next <= MAXSTEP) {
             enableStep(nextStepValue);
         }

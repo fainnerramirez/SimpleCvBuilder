@@ -1,6 +1,13 @@
 <template>
-    <el-card style="margin: 10px;">
+    <el-card class="container__work">
         <div class="container__work__app">
+            <div class="experience__delete">
+                <el-button type="danger" class="button" @click="deleteExperience(idExperience)">
+                    <el-icon size="20">
+                        <component :is="Delete" />
+                    </el-icon>
+                </el-button>
+            </div>
             <div>
                 <el-input class="input-field" v-model="inputCompany" type="text" size="large"
                     placeholder="Empresa"></el-input>
@@ -25,11 +32,15 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import type { WorkExperienceStoreProps } from '../types/types';
+import { Delete } from "@element-plus/icons-vue";
+import { useSimpleCvStore } from '../stores/store';
 
 interface Props { data: WorkExperienceStoreProps }
 const props = defineProps<Props>();
 const { data } = props;
 
+const store = useSimpleCvStore();
+const idExperience = ref<string>(data.id);
 const inputCompany = ref<string>(data.company);
 const inputPosition = ref<string>(data.position);
 const inputDateStart = ref<string>(data.dateStart);
@@ -37,9 +48,22 @@ const inputDateEnd = ref<string>(data.dateEnd);
 const checkActuallyWork = ref<boolean>(data.isActuallyWork);
 const inputDescription = ref<string>(data.description);
 
+const deleteExperience = (id: string) => {
+    console.log("Id work: ", id);
+    store.$patch((state) => {
+        state.workExperienceStore = state.workExperienceStore.filter(e => e.id !== id)
+    });
+    console.log("Nuevo state: ", store.workExperienceStore);
+}
+
 </script>
 
 <style scoped>
+.container__work {
+    padding: 2em;
+    margin-top: 0.5em;
+}
+
 .container__work__app {
     display: flex;
     justify-content: center;
@@ -54,7 +78,7 @@ const inputDescription = ref<string>(data.description);
     display: flex;
     gap: 10px;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     width: 100%;
 }
 
@@ -74,5 +98,11 @@ const inputDescription = ref<string>(data.description);
     width: 80%;
     min-width: 320px;
     max-width: 800px;
+}
+
+.experience__delete {
+    display: flex;
+    justify-content: end !important;
+    width: 100%;
 }
 </style>

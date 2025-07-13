@@ -1,12 +1,16 @@
 <template>
-  <div>
+  <div class="work">
     <h1 style="text-align: center;">Experiencia Laboral</h1>
-    <span v-for="experience in dataExperience">
+    <span v-for="experience in dataExperience" class="work-item">
       <ExperienceComponent :data="experience" />
     </span>
-    <el-button type="primary" @click="addExperience">Agregar nueva experiencia</el-button>
-    <el-button type="primary" @click="previous">Anterior</el-button>
-    <el-button type="primary" @click="next">Siguiente</el-button>
+    <div class="buttons">
+      <el-button type="primary" @click="addExperience">Agregar nueva experiencia</el-button>
+      <div class="buttons-actions">
+        <el-button type="primary" @click="previous">Anterior</el-button>
+        <el-button type="primary" @click="next">Siguiente</el-button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -38,4 +42,18 @@ const previous = () => store.previousStep();
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.work>.buttons {
+  margin-top: 0.5em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.work>.buttons>.buttons-actions {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+}
+</style>
