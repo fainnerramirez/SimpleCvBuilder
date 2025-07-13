@@ -49,11 +49,12 @@ const checkActuallyWork = ref<boolean>(data.isActuallyWork);
 const inputDescription = ref<string>(data.description);
 
 const deleteExperience = (id: string) => {
-    console.log("Id work: ", id);
-    store.$patch((state) => {
-        state.workExperienceStore = state.workExperienceStore.filter(e => e.id !== id)
-    });
-    console.log("Nuevo state: ", store.workExperienceStore);
+    const dataExperience = store.workExperienceStore;
+    if (dataExperience.length > 1) {
+        store.$patch((state) => {
+            state.workExperienceStore = state.workExperienceStore.filter(e => e.id !== id)
+        });
+    }
 }
 
 </script>
