@@ -1,77 +1,57 @@
-<script lang="ts" setup>
-import type { MaybeElement } from '@vueuse/core'
-import { reactify, useAnimate } from '@vueuse/core'
-import { reactive, useTemplateRef } from 'vue'
-import YAML from 'yaml'
-
-const stringify = reactify(
-  (input: any) => YAML.stringify(input, (k, v) => {
-    if (typeof v === 'function') {
-      return undefined
-    }
-    return v
-  }, {
-    singleQuote: true,
-    flowCollectionPadding: false,
-  }),
-)
-
-const el = useTemplateRef<MaybeElement>('el')
-
-const {
-  startTime,
-  currentTime,
-  playbackRate,
-  playState,
-  replaceState,
-  pending,
-} = useAnimate(
-  el,
-  [
-    { clipPath: 'circle(20% at 0% 30%)' },
-    { clipPath: 'circle(20% at 50% 80%)' },
-    { clipPath: 'circle(20% at 100% 30%)' },
-  ],
-  {
-    duration: 3000,
-    iterations: 3,
-    direction: 'alternate',
-    easing: 'cubic-bezier(0.46, 0.03, 0.52, 0.96)',
-  },
-)
-
-const text = stringify(reactive({
-  startTime,
-  currentTime,
-  playbackRate,
-  playState,
-  replaceState,
-  pending,
-}))
-</script>
-
 <template>
-    <div class="builder__header__app">
-        <h1 ref="el">SIMPLE CV BUILDER</h1>
-        <p>Crea tu CV fácilmente con un diseño minimalista y optimizado para reclutadores</p>
-    </div>
+  <div>
+    <AvatarComponent />
+  </div>
+  <div class="header__app">
+    <h1>CV Rápido, Impactante <br />y Listo para Reclutadores</h1>
+    <p class="header__description">Genera un CV impresionante con nuestro generador fácil de usar. <br /> Diseños
+      elegantes y optimizados para captar la
+      atención de los reclutadores en segundos</p>
+  </div>
+  <div class="header__start">
+    <el-input v-model="valueEmail" class="input" type="email" size="large" />
+    <el-button type="primary" size="large">Construye tu cv</el-button>
+  </div>
 </template>
 
+<script lang="ts" setup>
+import AvatarComponent from './AvatarComponent.vue';
+import { ref } from 'vue';
+const valueEmail = ref<string>();
+
+</script>
+
 <style scoped>
-.builder__header__app {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1rem;
+.header__app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
-.builder__header__app > h1 {
-    font-size: 2rem;
-    font-weight: bolder;
+.header__app>h1 {
+  font-size: 2rem;
+  font-weight: bolder;
 }
 
 p {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.header__description {
+  color: gray;
+  text-align: center;
+}
+
+.header__start {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.header__start>.input {
+  width: 400px;
 }
 </style>
