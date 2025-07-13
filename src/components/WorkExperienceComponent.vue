@@ -6,10 +6,14 @@
     </span>
     <div class="buttons">
       <el-button type="primary" @click="addExperience">Agregar nueva experiencia</el-button>
-      <div class="buttons-actions">
-        <el-button type="primary" @click="previous">Anterior</el-button>
-        <el-button type="primary" @click="next">Siguiente</el-button>
-      </div>
+      <el-button-group class="buttons-actions">
+        <el-button type="primary" :icon="ArrowLeft" @click="previous">Anterior</el-button>
+        <el-button type="primary" @click="next">
+          Siguiente<el-icon class="el-icon--right">
+            <ArrowRight />
+          </el-icon>
+        </el-button>
+      </el-button-group>
     </div>
   </div>
 </template>
@@ -19,6 +23,7 @@ import ExperienceComponent from './ExperienceComponent.vue';
 import { useSimpleCvStore } from '../stores/store';
 import { storeToRefs } from 'pinia';
 import { v4 as uuid } from 'uuid';
+import { ArrowLeft, ArrowRight } from "@element-plus/icons-vue";
 
 const store = useSimpleCvStore();
 const { workExperienceStore: dataExperience } = storeToRefs(store);
