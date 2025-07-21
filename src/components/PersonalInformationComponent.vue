@@ -30,8 +30,8 @@
 </template>
 
 <script lang="ts" setup>
+import { useSimpleCvStore } from "@/stores/store";
 import { ref } from "vue";
-import { useSimpleCvStore } from "../stores/store";
 
 const store = useSimpleCvStore();
 const data = store.personalInformationStore;

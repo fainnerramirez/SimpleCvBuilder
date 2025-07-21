@@ -12,10 +12,6 @@
     </div>
 </template>
 
-<script lang="ts" setup>
-// Tu código aquí
-</script>
-
 <style scoped>
 .group_avatars {
     display: flex;

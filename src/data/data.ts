@@ -1,13 +1,13 @@
-import { v4 as uuid } from "uuid"
-import type { OptionsSteps, Sections } from "../types/types"
-import { ref } from "vue";
 import {
-    User,
+    Document,
     School,
     Star,
-    Document,
-    Suitcase
+    Suitcase,
+    User
 } from '@element-plus/icons-vue';
+import { v4 as uuid } from "uuid";
+import { ref } from "vue";
+import type { OptionsSteps, Sections } from "../types/types";
 
 export const data: Sections[] = [
     {
@@ -30,7 +30,7 @@ export const data: Sections[] = [
 
 export const defaultProps = {
     children: 'children',
-    label: 'label',
+    label: 'label'
 }
 
 export const optionsStep = ref<OptionsSteps[]>([

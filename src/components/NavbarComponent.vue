@@ -13,8 +13,8 @@
 </template>
 
 <script lang="ts" setup>
+import logo from "@/assets/logo.png";
 import { ArrowRight } from "@element-plus/icons-vue";
-import logo from "../assets/logo.png";
 </script>
 
 <style scoped>

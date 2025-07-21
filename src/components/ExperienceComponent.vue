@@ -30,10 +30,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import type { WorkExperienceStoreProps } from '../types/types';
+import { useSimpleCvStore } from '@/stores/store';
+import type { WorkExperienceStoreProps } from '@/types/types';
 import { Delete } from "@element-plus/icons-vue";
-import { useSimpleCvStore } from '../stores/store';
+import { ref } from 'vue';
 
 interface Props { data: WorkExperienceStoreProps }
 const props = defineProps<Props>();

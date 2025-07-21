@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import AvatarComponent from './AvatarComponent.vue';
+import AvatarComponent from '@components/AvatarComponent.vue';
 import { ref } from 'vue';
 const valueEmail = ref<string>();
 

@@ -1,15 +1,15 @@
-import { createApp } from 'vue'
-import { createPinia } from "pinia"
 import ElementPlus from "element-plus";
 import 'element-plus/dist/index.css';
+import { createPinia } from "pinia";
+import { createApp } from 'vue';
 //@ts-ignore
 import '@fontsource/poppins';
 //@ts-ignore
 import '@fontsource-variable/inter';
-import './global.css';
 import Spanish from "element-plus/es/locale/lang/es";
-import App from './App.vue'
 import PluginPiniaState from "pinia-plugin-persistedstate";
+import App from './App.vue';
+import './global.css';
 
 const pinia = createPinia().use(PluginPiniaState);
 const app = createApp(App);

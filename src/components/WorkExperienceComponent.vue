@@ -22,11 +22,11 @@
 </template>
 
 <script lang="ts" setup>
-import ExperienceComponent from './ExperienceComponent.vue';
-import { useSimpleCvStore } from '../stores/store';
+import { useSimpleCvStore } from '@/stores/store';
+import ExperienceComponent from '@components/ExperienceComponent.vue';
+import { ArrowLeft, ArrowRight, Plus } from "@element-plus/icons-vue";
 import { storeToRefs } from 'pinia';
 import { v4 as uuid } from 'uuid';
-import { ArrowLeft, ArrowRight, Plus } from "@element-plus/icons-vue";
 
 const store = useSimpleCvStore();
 const { workExperienceStore: dataExperience } = storeToRefs(store);

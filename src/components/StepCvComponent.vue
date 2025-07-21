@@ -38,12 +38,12 @@
 </template>
 
 <script lang="ts" setup>
-import PersonalInformationComponent from "./PersonalInformationComponent.vue";
-import WorkExperienceComponent from './WorkExperienceComponent.vue';
-import EducationComponent from './EducationComponent.vue';
-import HabilityComponent from './HabilityComponent.vue';
-import ViewPreviewComponent from './ViewPreviewComponent.vue';
-import { useSimpleCvStore } from '../stores/store';
+import { useSimpleCvStore } from '@/stores/store';
+import EducationComponent from '@components/EducationComponent.vue';
+import HabilityComponent from '@components/HabilityComponent.vue';
+import PersonalInformationComponent from "@components/PersonalInformationComponent.vue";
+import ViewPreviewComponent from '@components/ViewPreviewComponent.vue';
+import WorkExperienceComponent from '@components/WorkExperienceComponent.vue';
 import { storeToRefs } from "pinia";
 import { optionsStep as options } from "../data/data";
 

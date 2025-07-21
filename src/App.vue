@@ -3,7 +3,7 @@
 // // import StaticsComponent from './components/StaticsComponent.vue';
 // import StepCvComponent from './components/StepCvComponent.vue';
 // import HeaderComponent from "./components/HeaderComponent.vue";
-import Landing from './pages/landing.vue';
+import Landing from '@/pages/landing.vue';
 </script>
 
 <template>

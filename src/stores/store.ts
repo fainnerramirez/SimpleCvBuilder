@@ -1,7 +1,7 @@
-import { ref } from "vue";
+import { optionsStep } from "@/data/data";
 import { defineStore } from "pinia";
 import { v4 as uuid } from "uuid";
-import { optionsStep } from "../data/data";
+import { ref } from "vue";
 import type { EducationStoreProps, HabilityStoreProps, PersonalInformationStoreProps, WorkExperienceStoreProps } from "../types/types";
 
 export const useSimpleCvStore = defineStore('simpleCVBuilderStore', () => {
