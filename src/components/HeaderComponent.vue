@@ -3,7 +3,7 @@
     <AvatarComponent />
   </div>
   <div class="header__app">
-    <h1>CV Rápido, Impactante <br />y Listo para Reclutadores</h1>
+    <h1 style="text-align: center;">CV Rápido, Simple <br />y Listo para Reclutadores</h1>
     <p class="header__description">Genera un CV impresionante con nuestro generador fácil de usar. <br /> Diseños
       elegantes y optimizados para captar la
       atención de los reclutadores en segundos</p>
@@ -18,7 +18,6 @@
 import AvatarComponent from '@components/AvatarComponent.vue';
 import { ref } from 'vue';
 const valueEmail = ref<string>();
-
 </script>
 
 <style scoped>
