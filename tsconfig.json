@@ -18,5 +18,7 @@
         "src/components/*"
       ]
     },
+    "module": "esnext",
+    "moduleResolution": "node"
   }
 }
